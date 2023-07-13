@@ -48,7 +48,6 @@ publishing {
             }
 	    myPublication(MavenPublication) {
 	      from components.java
-	      artifact sourceJar
 	     }
   } 
 }
