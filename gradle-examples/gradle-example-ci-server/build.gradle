@@ -47,7 +47,7 @@ publishing {
 	            artifactId "dreamx-narrative-api-ci"
 	            extension "zip"
 		 }
-		 from components.java 
+		 artifact jar 
 		
             }
 	//myPublication(MavenPublication) {
