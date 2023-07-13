@@ -26,20 +26,18 @@ allprojects {
     mavenCentral()
   }
 }
-
-project (':dreamx-narrative-api-deploy') {
-	configurations {
+configurations {
 	    archives
 	}
-	
-	task myZip(type: Zip) {
+task myZip(type: Zip) {
 	   from (files('./build/libs'))
 	   include '*'
 	   include '*/*' //to include contents of a folder present inside Reports directory
 	   archiveName 'Reports.zip'
 	   destinationDir(file('./'))
 	  }
-  publishing {
+
+publishing {
       publications {
             maven(MavenPublication) {
                  artifact ("Reports.zip") {
@@ -50,4 +48,3 @@ project (':dreamx-narrative-api-deploy') {
             }
      }
   } 
-}
