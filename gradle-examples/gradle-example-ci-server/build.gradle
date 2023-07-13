@@ -29,6 +29,9 @@ allprojects {
 configurations {
 	    archives
 	}
+jar { 
+   baseName = 'dreamx-narrative-api-ci'
+}
 task myZip(type: Zip) {
 	   from (files('./Reports/'))
 	   include '*'
@@ -44,10 +47,11 @@ publishing {
 	            artifactId "file1"
 	            extension "zip"
 		 }
+		 from components.java 
 		
             }
-	    myPublication(MavenPublication) {
-	      from components.java
-	     }
+	//myPublication(MavenPublication) {
+	    //  from components.java
+	// }
   } 
 }
