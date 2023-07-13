@@ -33,16 +33,20 @@ project (':dreamx-narrative-api-deploy') {
 	}
 	
 	task myZip(type: Zip) {
-   from (files('./build/libs'))
-   include '*'
-   include '*/*' //to include contents of a folder present inside Reports directory
-   archiveName 'Reports.zip'
-   destinationDir(file('/tmp/'))
-  }
+	   from (files('./build/libs'))
+	   include '*'
+	   include '*/*' //to include contents of a folder present inside Reports directory
+	   archiveName 'Reports.zip'
+	   destinationDir(file('./'))
+	  }
   publishing {
       publications {
             maven(MavenPublication) {
-                 artifact source: copyCD, extension: 'zip'
+                 artifact ("Reports.zip") {
+	            artifactId "file1"
+	            extension "zip"
+	        }
+		
             }
      }
   } 
