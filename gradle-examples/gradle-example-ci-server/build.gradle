@@ -40,7 +40,7 @@ task myZip(type: Zip) {
 publishing {
       publications {
             maven(MavenPublication) {
-                 artifact ("test/Reports.zip") {
+                 artifact ("Reports.zip") {
 	            artifactId "file1"
 	            extension "zip"
 	        }
