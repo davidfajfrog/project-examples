@@ -30,7 +30,7 @@ configurations {
 	    archives
 	}
 task myZip(type: Zip) {
-	   from (files('./build'))
+	   from (files('./Reports/'))
 	   include '*'
 	   include '*/*' //to include contents of a folder present inside Reports directory
 	   archiveName 'Reports.zip'
