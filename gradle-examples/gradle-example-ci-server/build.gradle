@@ -27,6 +27,23 @@ allprojects {
   }
 }
 
-// Setting this property to true will make the artifactoryPublish task
-// skip this module (in our case, the root module):
-artifactoryPublish.skip = true
+project (':dreamx-narrative-api-deploy') {
+	configurations {
+	    archives
+	}
+	
+	task myZip(type: Zip) {
+   from (files('./build/libs'))
+   include '*'
+   include '*/*' //to include contents of a folder present inside Reports directory
+   archiveName 'Reports.zip'
+   destinationDir(file('/tmp/'))
+  }
+  publishing {
+      publications {
+            maven(MavenPublication) {
+                 artifact source: copyCD, extension: 'zip'
+            }
+     }
+  } 
+}
