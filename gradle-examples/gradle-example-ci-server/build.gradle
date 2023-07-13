@@ -43,10 +43,11 @@ task myZip(type: Zip) {
 publishing {
       publications {
             maven(MavenPublication) {
-                 artifact ("Reports.zip") {
-	            artifactId "dreamx-narrative-api-ci"
-	            extension "zip"
-		 }
+                 //artifact ("Reports.zip") {
+	          //  artifactId "dreamx-narrative-api-ci"
+	           // extension "zip"
+		 //}
+		    artifact myZip
 		 artifact jar 
 		
             }
