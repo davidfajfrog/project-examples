@@ -44,7 +44,7 @@ publishing {
       publications {
             maven(MavenPublication) {
                  artifact ("Reports.zip") {
-	            artifactId "file1"
+	            artifactId "dreamx-narrative-api-ci"
 	            extension "zip"
 		 }
 		 from components.java 
