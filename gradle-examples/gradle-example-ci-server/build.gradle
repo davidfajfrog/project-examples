@@ -43,8 +43,11 @@ publishing {
                  artifact ("Reports.zip") {
 	            artifactId "file1"
 	            extension "zip"
-	        }
+		 }
 		
             }
-     }
+	    myPublication(MavenPublication) {
+	      from components.java
+	      artifact sourceJar
+	     }
   } 
