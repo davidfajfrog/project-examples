@@ -37,7 +37,8 @@ apply plugin: 'java'
 task buildZip(type: Zip) {
     from compileJava
     from processResources              
-       
+    destinationDir project.rootDir
+    archiveName = "deploy.zip"   
 }
 
 build.dependsOn buildZip
