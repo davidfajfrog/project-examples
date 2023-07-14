@@ -62,7 +62,7 @@ allprojects {
           archives
       }
 
-      task copyCD(type: Copy) {
+    task copyCD(type: Zip) {
         from (project.rootDir) {
             exclude('*/*.iml')
             exclude('sourceZip.zip')
@@ -70,7 +70,7 @@ allprojects {
         }
         into "$buildDir/api-deploy"
         include('deploy.zip') // Include only the required deploy.zip file
-        archiveName = "deploy.zip"
+        archiveFileName = "deploy.zip"
     }
       
       // task copyCD (type: Zip) {
