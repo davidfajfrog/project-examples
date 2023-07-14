@@ -42,9 +42,13 @@ allprojects {
   
   task buildZip(type: Zip) {
       from compileJava
-      from processResources              
+      from processResources
       destinationDir project.rootDir
-      archiveName = "deploy.zip"   
+      archiveName = "deploy.zip"
+      doLast {
+          println "Included files:"
+          filesIncluded.each { println it }
+    }
   }
   artifacts {
           archives buildZip
