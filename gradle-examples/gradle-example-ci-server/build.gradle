@@ -32,6 +32,15 @@ configurations {
 jar { 
    baseName = 'dreamx-narrative-api-ci'
 }
+task itMustRun {
+  doFirst {
+    println "It's running from start..."
+  }
+  doLast {
+    println "...to an end."
+  }
+}
+
 task myZip(type: Zip) {
    from 'api/'
    include '*'
@@ -43,10 +52,11 @@ project (':api') {
 	configurations {
 	    archives
 	}
-	doFirst {
+	
+	task copyCD (type: Zip) {
+	     doFirst {
 	    println "It's running from start..."
 	  }
-	task copyCD (type: Zip) {
 	     from (project.rootDir){
 	            exclude ('*/*.iml')
 	            exclude 'sourceZip.zip'
