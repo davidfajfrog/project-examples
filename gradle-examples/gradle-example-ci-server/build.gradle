@@ -38,11 +38,11 @@ project (':api') {
 	}
 	
 	task copyCD (type: Zip) {
-	     from ("src") {
-	         into "src"
-	         include "*"
-	       	 include "/**"
-	     }
+	     from (project.rootDir){
+	            exclude ('*/*.iml')
+	            exclude 'sourceZip.zip'
+	        }
+	        destinationDir project.rootDir
 	     archiveName = "deploy.zip"
 	}
 	artifacts {
