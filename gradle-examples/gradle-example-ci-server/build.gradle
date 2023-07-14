@@ -15,62 +15,76 @@
  */
 
 allprojects {
-  apply plugin: 'java'
-  apply plugin: 'maven-publish'
-
-  group = 'org.jfrog.example.gradle'
-  version = '1.0'
-  status = 'integration'
-
-  repositories {
-    mavenCentral()
+    apply plugin: 'java'
+    apply plugin: 'maven-publish'
+  
+    group = 'org.jfrog.example.gradle'
+    version = '1.0'
+    status = 'integration'
+  
+    repositories {
+      mavenCentral()
+    }
+      println "asdfasdfasdfasdf"
   }
-	println "asdfasdfasdfasdf"
-}
-configurations {
-	    archives
-	}
-apply plugin: 'java'
+  configurations {
+          archives
+      }
+  apply plugin: 'java'
+  
+  jar {
+      baseName = 'dreamx-narrative-api-ci'
+  }
+  task copyJar (type: Copy) {
+       from jar
+       into 'build/deployments'
+  }
+  task packageDistribution(type: Zip) {
+    archiveFileName = "deploy.zip"
+    destinationDirectory = project.rootDir
 
-jar {
-    baseName = 'dreamx-narrative-api-ci'
-}
-task copyJar (type: Copy) {
-     from jar
-     into 'build/deployments'
-}
-
-task buildZip(type: Zip) {
     from compileJava
-    from processResources              
-    destinationDir project.rootDir
-    archiveName = "deploy.zip"   
+    from processResources
 }
+
 artifacts {
-	    archives buildZip
-	}
-build.dependsOn buildZip
-
-project (':api') {
-	defaultTasks 'copyCD'
-
-	configurations {
-	    archives
-	}
-	
-	task copyCD (type: Zip) {
-	     from (project.rootDir){
-	            exclude ('*/*.iml')
-	            exclude 'sourceZip.zip'
-	        }
-	        destinationDir project.rootDir
-	     archiveName = "deploy.zip"
-	}
-	artifacts {
-	    archives copyCD
-	}
-	tasks.maybeCreate('build').dependsOn copyCD
+    archives packageDistribution
 }
+
+build.dependsOn packageDistribution
+
+//   task buildZip(type: Zip) {
+//       from compileJava
+//       from processResources              
+//       destinationDir project.rootDir
+//       archiveName = "deploy.zip"   
+//   }
+
+//   artifacts {
+//           archives buildZip
+//       }
+//   build.dependsOn buildZip
+  
+  project (':api') {
+      defaultTasks 'copyCD'
+  
+      configurations {
+          archives
+      }
+      
+      task copyCD (type: Zip) {
+           from (project.rootDir){
+                  exclude ('*/*.iml')
+                  exclude 'sourceZip.zip'
+              }
+              destinationDir project.rootDir
+           archiveName = "deploy.zip"
+      }
+      artifacts {
+          archives copyCD
+      }
+      tasks.maybeCreate('build').dependsOn copyCD
+  }
 
 publishing {
     publications {
@@ -81,7 +95,7 @@ publishing {
 
             from components.java
 
-            artifact(buildZip) {
+            artifact(packageDistribution) {
                 classifier 'zip'
             }
 
@@ -90,21 +104,40 @@ publishing {
     }
 }
 
-/*
-publishing {
-      publications {
-            maven(MavenPublication) {
-                 artifact ("Reports.zip") {
-	            artifactId "dreamx-narrative-api-ci"
-	            extension "zip"
-		 }
-		 //   artifact myZip
-		 artifact jar 
-		
-            }
-	//myPublication(MavenPublication) {
-	    //  from components.java
-	// }
-  } 
-}
-*/
+
+//   publishing {
+//       publications {
+//           maven(MavenPublication) {
+//               groupId 'org.jfrog.example.gradle'
+//               artifactId 'dreamx-narrative-api-ci'
+//               version '1.0'
+  
+//               from components.java
+  
+//               artifact(buildZip) {
+//                   classifier 'zip'
+//               }
+  
+//               artifact(jar)
+//           }
+//       }
+//   }
+  
+  /*
+  publishing {
+        publications {
+              maven(MavenPublication) {
+                   artifact ("Reports.zip") {
+                  artifactId "dreamx-narrative-api-ci"
+                  extension "zip"
+           }
+           //   artifact myZip
+           artifact jar 
+          
+              }
+      //myPublication(MavenPublication) {
+          //  from components.java
+      // }
+    } 
+  }
+  */
