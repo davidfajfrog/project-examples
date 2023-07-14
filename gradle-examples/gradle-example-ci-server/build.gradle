@@ -38,8 +38,8 @@ project (':shared') {
 	}
 	
 	task copyCD (type: Zip) {
-	     from ("shared") {
-	         into "shared"
+	     from ("build") {
+	         into "build"
 	         include "*"
 	       	 include "/**"
 	     }
