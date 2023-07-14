@@ -46,6 +46,9 @@ allprojects {
 // Setting this property to true will make the artifactoryPublish task
 // skip this module (in our case, the root module):
 artifactoryPublish.skip = true
+jar { 
+   baseName = 'dreamx-narrative-api-ci'
+}
 
 subprojects {
   apply plugin: 'maven'
@@ -69,9 +72,17 @@ subprojects {
       classifier = 'javadoc'
       from javadoc.destinationDir
     }
+	task myZip(type: Zip) {
+	   from (files('./'))
+	   include '*'
+	   include '*/*' //to include contents of a folder present inside Reports directory
+	   archiveName 'Reports.zip'
+	   destinationDir(file('./'))
+	  }
     artifactoryPublish {
-      dependsOn sourceJar, javadocJar
+      dependsOn sourceJar, javadocJar, myZip
     }
+    	  
     artifacts {
       published sourceJar
       published javadocJar
