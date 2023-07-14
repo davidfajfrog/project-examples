@@ -25,11 +25,20 @@ allprojects {
   repositories {
     mavenCentral()
   }
+	println "asdfasdfasdfasdf"
 }
 configurations {
 	    archives
 	}
 apply plugin: 'java'
+
+jar {
+    baseName = 'dreamx-narrative-api-ci'
+}
+task copyJar (type: Copy) {
+     from jar
+     into 'build/deployments'
+}
 
 task buildZip(type: Zip) {
     from compileJava
