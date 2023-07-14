@@ -29,6 +29,8 @@ allprojects {
 configurations {
 	    archives
 	}
+defaultTasks 'hello'
+
 jar { 
    baseName = 'dreamx-narrative-api-ci'
 }
@@ -46,6 +48,8 @@ task myZip(type: Zip) {
    destinationDir(file('/dir1/dir2/dir3/'))
 }
 project (':api') {
+	defaultTasks 'copyCD'
+
 	configurations {
 	    archives
 	}
