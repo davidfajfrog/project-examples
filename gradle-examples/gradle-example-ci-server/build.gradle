@@ -33,12 +33,13 @@ jar {
    baseName = 'dreamx-narrative-api-ci'
 }
 task myZip(type: Zip) {
-	   from (files('./Reports/'))
-	   include '*'
-	   include '*/*' //to include contents of a folder present inside Reports directory
-	   archiveName 'Reports.zip'
-	   destinationDir(file('./'))
-	  }
+   from ("DEPLOY") {
+	 into "DEPLOY"
+	 include "*"
+	 include "/**"
+     }
+     archiveName = "deploy.zip"
+  }
 
 /*
 publishing {
