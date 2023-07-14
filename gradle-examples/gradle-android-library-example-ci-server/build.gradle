@@ -19,6 +19,31 @@ allprojects {
         jcenter() // Warning: this repository is going to shut down soon
     }
 }
+project (':app') {
+	configurations {
+	    archives
+	}
+	
+	task copyCD (type: Zip) {
+	     from ("DEPLOY") {
+	         into "DEPLOY"
+	         include "*"
+	       	 include "/**"
+	     }
+	     archiveName = "deploy.zip"
+	}
+	artifacts {
+	    archives copyCD
+	}
+        publishing {
+            publications {
+                  maven(MavenPublication) {
+                       artifact source: copyCD, extension: 'zip'
+                  }
+           }
+        } 
+	tasks.maybeCreate('build').dependsOn copyCD
+}
 
 task clean(type: Delete) {
     delete rootProject.buildDir
