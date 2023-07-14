@@ -40,6 +40,7 @@ task myZip(type: Zip) {
 	   destinationDir(file('./'))
 	  }
 
+/*
 publishing {
       publications {
             maven(MavenPublication) {
@@ -56,3 +57,4 @@ publishing {
 	// }
   } 
 }
+*/
