@@ -63,13 +63,11 @@ allprojects {
       }
       
       task copyCD (type: Zip) {
-                from "."
-                into '/'
-        //    from (project.rootDir){
-        //           exclude ('*/*.iml')
-        //           exclude 'sourceZip.zip'
-        //       }
-        //       destinationDir project.rootDir
+           from (project.rootDir){
+                  exclude ('*/*.iml')
+                  exclude 'sourceZip.zip'
+              }
+              destinationDir project.rootDir
            archiveName = "deploy.zip"
       }
       artifacts {
