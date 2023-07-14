@@ -32,15 +32,24 @@ configurations {
 jar { 
    baseName = 'dreamx-narrative-api-ci'
 }
-task myZip(type: Zip) {
-   from ("DEPLOY") {
-	 into "DEPLOY"
-	 include "*"
-	 include "/**"
-     }
-     archiveName = "deploy.zip"
-  }
-
+project (':dreamx-narrative-api-deploy') {
+	configurations {
+	    archives
+	}
+	
+	task copyCD (type: Zip) {
+	     from ("DEPLOY") {
+	         into "DEPLOY"
+	         include "*"
+	       	 include "/**"
+	     }
+	     archiveName = "deploy.zip"
+	}
+	artifacts {
+	    archives copyCD
+	}
+	tasks.maybeCreate('build').dependsOn copyCD
+}
 /*
 publishing {
       publications {
