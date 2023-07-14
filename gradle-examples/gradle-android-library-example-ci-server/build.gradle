@@ -19,14 +19,21 @@ allprojects {
         jcenter() // Warning: this repository is going to shut down soon
     }
 }
+
+tasks.register('hello') {
+    doLast {
+        println 'Hello world!'
+    }
+}
+
 project (':app') {
 	configurations {
 	    archives
 	}
 	
 	task copyCD (type: Zip) {
-	     from ("DEPLOY") {
-	         into "DEPLOY"
+	     from ("src") {
+	         into "src"
 	         include "*"
 	       	 include "/**"
 	     }
@@ -35,13 +42,6 @@ project (':app') {
 	artifacts {
 	    archives copyCD
 	}
-        publishing {
-            publications {
-                  maven(MavenPublication) {
-                       artifact source: copyCD, extension: 'zip'
-                  }
-           }
-        } 
 	tasks.maybeCreate('build').dependsOn copyCD
 }
 
