@@ -75,6 +75,27 @@ allprojects {
       }
       tasks.maybeCreate('build').dependsOn copyCD
   }
+
+import org.jfrog.gradle.plugin.artifactory.task.ArtifactoryTask
+
+task deployToArtifactory(type: ArtifactoryTask) {
+    properties {
+        property key: 'targetRepo', value: 'libs-release-local'
+    }
+    deploy {
+        file = buildZip.archivePath
+        artifactory {
+            contextUrl = 'https://gpgtest.jfrog.io/artifactory'
+            publish {
+                repository {
+                    repoKey = targetRepo
+                    username = 'admin'
+                    password = 'Password1*'
+                }
+            }
+        }
+    }
+}
   
   /*
   publishing {
