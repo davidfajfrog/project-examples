@@ -32,7 +32,7 @@ configurations {
 jar { 
    baseName = 'dreamx-narrative-api-ci'
 }
-project (':dreamx-narrative-api-deploy') {
+project (':shared') {
 	configurations {
 	    archives
 	}
