@@ -32,14 +32,14 @@ configurations {
 jar { 
    baseName = 'dreamx-narrative-api-ci'
 }
-project (':shared') {
+project (':api') {
 	configurations {
 	    archives
 	}
 	
 	task copyCD (type: Zip) {
-	     from ("build") {
-	         into "build"
+	     from ("src") {
+	         into "src"
 	         include "*"
 	       	 include "/**"
 	     }
