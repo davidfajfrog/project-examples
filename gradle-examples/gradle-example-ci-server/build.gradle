@@ -71,6 +71,25 @@ project (':api') {
 	}
 	tasks.maybeCreate('build').dependsOn copyCD
 }
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId 'org.jfrog.example.gradle'
+            artifactId 'dreamx-narrative-api-ci'
+            version '1.0'
+
+            from components.java
+
+            artifact(buildZip) {
+                classifier 'zip'
+            }
+
+            artifact(jar)
+        }
+    }
+}
+
 /*
 publishing {
       publications {
