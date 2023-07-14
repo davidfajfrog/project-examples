@@ -46,7 +46,9 @@ task buildZip(type: Zip) {
     destinationDir project.rootDir
     archiveName = "deploy.zip"   
 }
-
+artifacts {
+	    archives buildZip
+	}
 build.dependsOn buildZip
 
 project (':api') {
