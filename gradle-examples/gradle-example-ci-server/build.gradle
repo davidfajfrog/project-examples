@@ -102,6 +102,7 @@ publishing {
             artifact(jar)
         }
     }
+    artifactoryPublish.dependsOn packageDistribution
 }
 
 
