@@ -43,7 +43,9 @@ project (':api') {
 	configurations {
 	    archives
 	}
-	
+	doFirst {
+	    println "It's running from start..."
+	  }
 	task copyCD (type: Zip) {
 	     from (project.rootDir){
 	            exclude ('*/*.iml')
