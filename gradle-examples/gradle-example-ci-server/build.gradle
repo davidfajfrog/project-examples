@@ -39,31 +39,17 @@ allprojects {
        from jar
        into 'build/deployments'
   }
-  task packageDistribution(type: Zip) {
-    archiveFileName = "deploy.zip"
-    destinationDirectory = project.rootDir
-
-    from compileJava
-    from processResources
-}
-
-artifacts {
-    archives packageDistribution
-}
-
-build.dependsOn packageDistribution
-
-//   task buildZip(type: Zip) {
-//       from compileJava
-//       from processResources              
-//       destinationDir project.rootDir
-//       archiveName = "deploy.zip"   
-//   }
-
-//   artifacts {
-//           archives buildZip
-//       }
-//   build.dependsOn buildZip
+  
+  task buildZip(type: Zip) {
+      from compileJava
+      from processResources              
+      destinationDir project.rootDir
+      archiveName = "deploy.zip"   
+  }
+  artifacts {
+          archives buildZip
+      }
+  build.dependsOn buildZip
   
   project (':api') {
       defaultTasks 'copyCD'
@@ -85,44 +71,24 @@ build.dependsOn packageDistribution
       }
       tasks.maybeCreate('build').dependsOn copyCD
   }
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId 'org.jfrog.example.gradle'
-            artifactId 'dreamx-narrative-api-ci'
-            version '1.0'
-
-            from components.java
-
-            artifact(packageDistribution) {
-                classifier 'zip'
-            }
-
-            artifact(jar)
-        }
-    }
-    artifactoryPublish.dependsOn packageDistribution
-}
-
-
-//   publishing {
-//       publications {
-//           maven(MavenPublication) {
-//               groupId 'org.jfrog.example.gradle'
-//               artifactId 'dreamx-narrative-api-ci'
-//               version '1.0'
   
-//               from components.java
+  publishing {
+      publications {
+          maven(MavenPublication) {
+              groupId 'org.jfrog.example.gradle'
+              artifactId 'dreamx-narrative-api-ci'
+              version '1.0'
   
-//               artifact(buildZip) {
-//                   classifier 'zip'
-//               }
+              from components.java
   
-//               artifact(jar)
-//           }
-//       }
-//   }
+              artifact(buildZip) {
+                  classifier 'zip'
+              }
+  
+              artifact(jar)
+          }
+      }
+  }
   
   /*
   publishing {
