@@ -33,7 +33,7 @@ allprojects {
   apply plugin: 'java'
   
   jar {
-      baseName = 'dreamx-narrative-api-ci'
+      archiveBaseName = 'dreamx-narrative-api-ci'
   }
   task copyJar (type: Copy) {
        from jar
@@ -43,8 +43,8 @@ allprojects {
   task buildZip(type: Zip) {
       from compileJava
       from processResources
-      destinationDir project.rootDir
-      archiveName = "deploy.zip"
+      destinationDirectory project.rootDir
+      archiveFileName = "deploy.zip"
       doLast {
           println "Included files:"
           filesIncluded.each { println it }
@@ -67,8 +67,8 @@ allprojects {
                   exclude ('*/*.iml')
                   exclude 'sourceZip.zip'
               }
-              destinationDir project.rootDir
-           archiveName = "deploy.zip"
+              destinationDirectory project.rootDir
+           archiveFileName = "deploy.zip"
       }
       artifacts {
           archives copyCD
