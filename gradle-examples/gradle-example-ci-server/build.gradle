@@ -29,9 +29,6 @@ allprojects {
 configurations {
 	    archives
 	}
-jar { 
-   baseName = 'dreamx-narrative-api-ci'
-}
 apply plugin: 'java'
 
 task buildZip(type: Zip) {
