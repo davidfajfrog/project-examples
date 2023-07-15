@@ -75,9 +75,10 @@ allprojects {
                   exclude ('*/*.iml')
                   exclude 'sourceZip.zip'
                   exclude('build/') // Exclude the build directory to avoid recursive copying
-              }
-              destinationDir project.rootDir
-           archiveName = "deploy2.zip"
+          }
+          destinationDir project.rootDir
+          include('deploy.zip') // Include only the required deploy.zip file
+          archiveName = "deploy2.zip"
       }
       artifacts {
           archives copyCD
