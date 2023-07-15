@@ -40,11 +40,12 @@ allprojects {
        into 'build/deployments'
   }
 
+  apply plugin: 'java'
   task buildZip(type: Zip) {
       from compileJava
       from processResources
       destinationDir project.rootDir
-      archiveName = "deploy3.zip"
+      archiveName = "deploy.zip"
   }
   artifacts {
           archives buildZip
@@ -58,7 +59,7 @@ allprojects {
           archives
       }
 
-    task copyCD(type: Zip) {
+      task copyCD(type: Zip) {
         from (project.rootDir) {
             exclude('*/*.iml')
             exclude('sourceZip.zip')
@@ -66,7 +67,7 @@ allprojects {
         }
         into "$buildDir/api-deploy"
         include('deploy.zip') // Include only the required deploy.zip file
-        archiveFileName = "deploy1.zip"
+        archiveFileName = "deploy.zip"
     }
       
       // task copyCD (type: Zip) {
@@ -77,7 +78,7 @@ allprojects {
       //     }
       //     destinationDir project.rootDir
       //     include('deploy.zip') // Include only the required deploy.zip file
-      //     archiveName = "deploy2.zip"
+      //     archiveName = "deploy.zip"
       // }
       artifacts {
           archives copyCD
