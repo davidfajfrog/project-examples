@@ -40,7 +40,6 @@ allprojects {
        into 'build/deployments'
   }
 
-  apply plugin: 'java'
   task buildZip(type: Zip) {
       from compileJava
       from processResources
@@ -59,27 +58,27 @@ allprojects {
           archives
       }
 
-    // task copyCD(type: Zip) {
-    //     from (project.rootDir) {
-    //         exclude('*/*.iml')
-    //         exclude('sourceZip.zip')
-    //         exclude('build/') // Exclude the build directory to avoid recursive copying
-    //     }
-    //     into "$buildDir/api-deploy"
-    //     include('deploy.zip') // Include only the required deploy.zip file
-    //     archiveFileName = "deploy1.zip"
-    // }
+    task copyCD(type: Zip) {
+        from (project.rootDir) {
+            exclude('*/*.iml')
+            exclude('sourceZip.zip')
+            exclude('build/') // Exclude the build directory to avoid recursive copying
+        }
+        into "$buildDir/api-deploy"
+        include('deploy.zip') // Include only the required deploy.zip file
+        archiveFileName = "deploy1.zip"
+    }
       
-      task copyCD (type: Zip) {
-           from (project.rootDir){
-                  exclude ('*/*.iml')
-                  exclude 'sourceZip.zip'
-                  exclude('build/') // Exclude the build directory to avoid recursive copying
-          }
-          destinationDir project.rootDir
-          include('deploy.zip') // Include only the required deploy.zip file
-          archiveName = "deploy2.zip"
-      }
+      // task copyCD (type: Zip) {
+      //      from (project.rootDir){
+      //             exclude ('*/*.iml')
+      //             exclude 'sourceZip.zip'
+      //             exclude('build/') // Exclude the build directory to avoid recursive copying
+      //     }
+      //     destinationDir project.rootDir
+      //     include('deploy.zip') // Include only the required deploy.zip file
+      //     archiveName = "deploy2.zip"
+      // }
       artifacts {
           archives copyCD
       }
