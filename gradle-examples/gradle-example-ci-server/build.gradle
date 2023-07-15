@@ -45,7 +45,7 @@ allprojects {
       from compileJava
       from processResources
       destinationDir project.rootDir
-      archiveName = "deploy.zip"
+      archiveName = "deploy1.zip"
   }
   artifacts {
           archives buildZip
