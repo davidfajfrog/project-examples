@@ -39,16 +39,13 @@ allprojects {
        from jar
        into 'build/deployments'
   }
-  
+
+  apply plugin: 'java'
   task buildZip(type: Zip) {
       from compileJava
       from processResources
       destinationDir project.rootDir
       archiveName = "deploy.zip"
-      doLast {
-          println "Included files:"
-          filesIncluded.each { println it }
-    }
   }
   artifacts {
           archives buildZip
