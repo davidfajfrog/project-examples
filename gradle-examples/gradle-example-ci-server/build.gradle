@@ -45,7 +45,7 @@ allprojects {
       from compileJava
       from processResources
       destinationDir project.rootDir
-      archiveName = "deploy1.zip"
+      archiveName = "deploy3.zip"
   }
   artifacts {
           archives buildZip
@@ -59,25 +59,25 @@ allprojects {
           archives
       }
 
-    task copyCD(type: Zip) {
-        from (project.rootDir) {
-            exclude('*/*.iml')
-            exclude('sourceZip.zip')
-            exclude('build/') // Exclude the build directory to avoid recursive copying
-        }
-        into "$buildDir/api-deploy"
-        include('deploy.zip') // Include only the required deploy.zip file
-        archiveFileName = "deploy1.zip"
-    }
+    // task copyCD(type: Zip) {
+    //     from (project.rootDir) {
+    //         exclude('*/*.iml')
+    //         exclude('sourceZip.zip')
+    //         exclude('build/') // Exclude the build directory to avoid recursive copying
+    //     }
+    //     into "$buildDir/api-deploy"
+    //     include('deploy.zip') // Include only the required deploy.zip file
+    //     archiveFileName = "deploy1.zip"
+    // }
       
-      // task copyCD (type: Zip) {
-      //      from (project.rootDir){
-      //             exclude ('*/*.iml')
-      //             exclude 'sourceZip.zip'
-      //         }
-      //         destinationDir project.rootDir
-      //      archiveName = "deploy.zip"
-      // }
+      task copyCD (type: Zip) {
+           from (project.rootDir){
+                  exclude ('*/*.iml')
+                  exclude 'sourceZip.zip'
+              }
+              destinationDir project.rootDir
+           archiveName = "deploy2.zip"
+      }
       artifacts {
           archives copyCD
       }
