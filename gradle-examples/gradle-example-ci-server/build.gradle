@@ -65,7 +65,8 @@ allprojects {
             exclude('build/') // Exclude the build directory to avoid recursive copying
         }
         // into "$buildDir/api-deploy"
-        destinationDir project.rootDir
+        into project.rootDir
+        // destinationDir project.rootDir
         include('deploy.zip') // Include only the required deploy.zip file
         archiveFileName = "deploy.zip"
     }
