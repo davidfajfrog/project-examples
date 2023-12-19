@@ -8,7 +8,7 @@
       {
         "files": [
           {
-            "pattern": *",
+            "pattern": "*",
              "target": "MyArtifact/prod/$(version)",
               "flat": "false"
           }
