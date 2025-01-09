@@ -12,7 +12,6 @@ steps:
 - task: JFrogDotnetCore@1
   inputs:
     command: 'restore'
-    arguments: '''/property:Configuration=Release '''
     artifactoryConnection: 'Arti-elinaf'
     targetResolveRepo: 'davidfa-nuget'
     rootPath: '**/*.sln'
