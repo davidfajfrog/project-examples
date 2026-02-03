@@ -8,6 +8,10 @@ variables:
   system.debug: true
   
 steps:
+- script: |
+    node -v
+    which node
+  displayName: 'Check Node Version'
 - task: JfrogCliV2@1
   inputs:
     jfrogPlatformConnection: 'elinaf-platform'
