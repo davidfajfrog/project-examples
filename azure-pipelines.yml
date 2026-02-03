@@ -23,6 +23,12 @@ steps:
     echo "VERSION UTILISEE POUR LE TEST :"
     node -v
   displayName: 'Check Node Version before JFrog'
+  
+- powershell: |
+    # On force la variable que l'agent utilise parfois pour localiser Node
+    Write-Host "##vso[task.setvariable variable=AGENT_NODE_PATH]$(which node)"
+  displayName: 'Force Agent to use Node 12'
+
 - task: JfrogCliV2@1
   inputs:
     jfrogPlatformConnection: 'elinaf-platform'
