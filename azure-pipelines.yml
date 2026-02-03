@@ -8,10 +8,12 @@ variables:
   system.debug: true
   
 steps:
-- script: |
-    node -v
-    which node
-  displayName: 'Check Node Version'
+- bash: |
+    # Localise le node interne dans le dossier de l'agent
+    INTERNAL_NODE=$(find $AGENT_HOMEDIRECTORY/externals -name node -type f | head -n 1)
+    echo "Le Node interne de l'agent est : $INTERNAL_NODE"
+    $INTERNAL_NODE -v
+  displayName: 'Vérification Node Interne Agent'
 - task: JfrogCliV2@1
   inputs:
     jfrogPlatformConnection: 'elinaf-platform'
