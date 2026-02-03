@@ -24,10 +24,23 @@ steps:
     node -v
   displayName: 'Check Node Version before JFrog'
   
-- powershell: |
-    # On force la variable que l'agent utilise parfois pour localiser Node
-    Write-Host "##vso[task.setvariable variable=AGENT_NODE_PATH]$(which node)"
-  displayName: 'Force Agent to use Node 12'
+- bash: |
+    echo "--- Vérification de la version de Node ---"
+    NODE_PATH=$(which node)
+    $NODE_PATH -v
+    
+    echo "--- Tentative de chargement du script JFrog avec Node 12 ---"
+    # On cherche le fichier utils.js dans le répertoire de travail de l'agent
+    # Le chemin est basé sur l'erreur que tu as reçue
+    TARGET_FILE=$(find $(Agent.WorkFolder) -path "*/node_modules/@jfrog/tasks-utils/utils.js" | head -n 1)
+    
+    if [ -f "$TARGET_FILE" ]; then
+        echo "Fichier trouvé : $TARGET_FILE"
+        $NODE_PATH -e "require('$TARGET_FILE')"
+    else
+        echo "Erreur : Impossible de localiser utils.js. Lance le build JFrog une fois pour qu'il télécharge les dépendances."
+    fi
+  displayName: 'Reproduce Syntax Error'
 
 - task: JfrogCliV2@1
   inputs:
