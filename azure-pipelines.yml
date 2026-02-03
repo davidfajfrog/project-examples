@@ -4,7 +4,9 @@ trigger:
 pool:
   name: Default
   
-
+variables:
+  system.debug: true
+  
 steps:
 - task: JfrogCliV2@1
   inputs:
