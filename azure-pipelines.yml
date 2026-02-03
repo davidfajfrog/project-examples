@@ -1,17 +1,14 @@
-
-
 trigger:
 - master
 
 pool:
   vmImage: 'windows-latest'
 
-
 steps:
-# ASP.NET
-- task: JFrogDotnetCore@1
+
+- task: JfrogCliV2@1
   inputs:
-    command: 'restore'
-    artifactoryConnection: 'Arti-elinaf'
-    targetResolveRepo: 'davidfa-nuget'
-    rootPath: '**/*.sln'
+    jfrogPlatformConnection: 'elinaf-art'
+    command: |
+      jf rt dl example-repo-local/crowdstrike.6.39.15316.0.nupkg --build-name=davidfa-azure --build-number=1
+      jf rt bp davidfa-azure 1
