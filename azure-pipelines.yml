@@ -14,6 +14,15 @@ steps:
     echo "Le Node interne de l'agent est : $INTERNAL_NODE"
     $INTERNAL_NODE -v
   displayName: 'Vérification Node Interne Agent'
+
+- task: NodeTool@0
+  inputs:
+    versionSpec: '12.x'
+
+- script: |
+    echo "VERSION UTILISEE POUR LE TEST :"
+    node -v
+  displayName: 'Check Node Version before JFrog'
 - task: JfrogCliV2@1
   inputs:
     jfrogPlatformConnection: 'elinaf-platform'
