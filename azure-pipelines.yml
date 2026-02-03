@@ -6,9 +6,13 @@ pool:
   
 
 steps:
+- task: JfrogCliV2@1
+  inputs:
+    jfrogPlatformConnection: 'elinaf-platform'
+    command: 'jf rt dl example-repo-local/crowdstrike.6.39.15316.0.nupkg --build-name=davidfa-azure --build-number=1'
 - task: JFrogPublishBuildInfo@1
   inputs:
     artifactoryConnection: 'elinaf-artv2'
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
+    buildName: 'davidfa-azure'
+    buildNumber: '1'
 
